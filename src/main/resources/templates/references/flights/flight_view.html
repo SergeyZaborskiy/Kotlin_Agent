@@ -15,8 +15,33 @@
 <div th:replace="fragments/header :: header">TOP MENU</div>
 <!-- Body -->
 <div class="container-fluid">
+    <br/>
     <h1 th:text = "#{FlightsPageTitle}">VALUE</h1>
-    <p th:text ="#{WelcomeText}"/>
+    <div class="btn-group-sm">
+        <a class="btn btn-outline-primary" href="/" role="button">Return to Main</a>
+    </div>
+    <br/>
+    <table class="table caption-top">
+        <caption>List of flights</caption>
+        <tr>
+            <th>Route</th>
+            <th>Aircraft</th>
+            <th>Bort</th>
+            <th>Type of Operation</th>
+            <th>Time of Operation</th>
+            <th>Date of Operation</th>
+            <th>Operations</th>
+        </tr>
+        <tr>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+        </tr>
+    </table>
 </div>
 <!-- Bootstrap script -->
 <script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js" th:href="@{../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>

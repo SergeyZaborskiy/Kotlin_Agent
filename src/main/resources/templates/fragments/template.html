@@ -15,11 +15,7 @@
 <!-- Header -->
 <div th:replace="fragments/header :: header">TOP MENU</div>
 <!-- Body -->
-<div class="container-fluid">
-    <br/>
-    <h1 th:text = "#{MainPageTitle}">VALUE</h1>
-    <p th:text ="#{WelcomeText}"/>
-</div>
+<div th:replace="${bodyFragment}">BODY</div>
 <!-- Bootstrap script -->
 <script src="webjars/bootstrap/4.6.0-1/js/bootstrap.js" th:href="@{webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
 </body>

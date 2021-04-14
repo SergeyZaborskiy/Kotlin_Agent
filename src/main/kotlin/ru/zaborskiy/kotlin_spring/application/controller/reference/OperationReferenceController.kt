@@ -1,22 +1,52 @@
 package ru.zaborskiy.kotlin_spring.application.controller.reference
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.*
+import ru.zaborskiy.kotlin_spring.application.service.OperationService
+import ru.zaborskiy.kotlin_spring.application.service.VirtualSQL
+import ru.zaborskiy.kotlin_spring.domain.entity.operation.Operation
 
 @Controller
 @RequestMapping("/references/operations")
-class OperationReferenceController {
+class OperationReferenceController(private val operationService: OperationService) {
 
     @GetMapping
-    fun showOperationsView(model: Model): String {
+    fun getOperationsList(model: Model): String {
+        model.addAttribute("operationsList", operationService.all())
         return "/references/operations/operations_view"
     }
 
     @GetMapping("/{:id}")
-    fun showOperationForm(model: Model, @PathVariable id: String): String {
+    fun getOperationById(model: Model, @PathVariable id: String): String {
         return "/references/operations/operation_form"
     }
+
+    @GetMapping("/new")
+    fun getOperationForm(model: Model):String {
+        var operation = Operation()
+        model.addAttribute("operation", operation)
+        return "/references/operations/operation_form"
+    }
+
+    @PostMapping
+    fun addOperation(@ModelAttribute operation: Operation):String {
+        operationService.add(operation)
+        return "redirect:/references/operations"
+    }
+
+    @PutMapping("/{id}")
+    fun editOperation(@PathVariable id:Long, model: Model):String{
+        var operation = operationService.get(id)
+        model.addAttribute(operation)
+        return "/references/operations/operation_form"
+    }
+
+    @DeleteMapping("/{id}")
+    fun deleteOperation(@PathVariable id: Long):String{
+        operationService.remove(id)
+        return "redirect:/references/operations"
+    }
+
 }

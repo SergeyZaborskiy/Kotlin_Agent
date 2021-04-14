@@ -1,25 +1,24 @@
 package ru.zaborskiy.kotlin_spring.configuration
 
 import org.springframework.context.annotation.Configuration
-import ru.zaborskiy.kotlin_spring.application.service.AircraftDAO
-import ru.zaborskiy.kotlin_spring.domain.entity.Aircraft
+import ru.zaborskiy.kotlin_spring.application.service.OperationService
+import ru.zaborskiy.kotlin_spring.domain.entity.operation.Operation
+import javax.annotation.PostConstruct
 
 @Configuration
-class DemoSource {
+class DemoSource(private val operationService: OperationService) {
 
-    val dao:AircraftDAO = AircraftDAO()
-
+    @PostConstruct
     fun demoSource() {
-        var plane1 = Aircraft()
-        plane1.name = "SU-9"
-        plane1.maxFuel = 100
 
-        var plane2 = Aircraft()
-        plane2.name = "727-400"
-        plane2.maxFuel = 200
+        var operation1 = Operation()
+        operation1.name = "Загрузка"
 
-        dao.addAircraft(plane1)
-        dao.addAircraft(plane2)
+        var operation2 = Operation()
+        operation2.name = "Выгрузка"
+
+        operationService.add(operation1)
+        operationService.add(operation2)
 
     }
 }

@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link type="text/css" rel="stylesheet" href="../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
           th:href="@{../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
-    <script src="../../webjars/jquery/3.5.1/jquery.min.js" th:href="@{../../webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script src="../../webjars/jquery/3.5.1/jquery.min.js"
+            th:href="@{../../webjars/jquery/3.5.1/jquery.min.js}"></script>
 </head>
 
 <body>
@@ -15,10 +16,44 @@
 <div th:replace="fragments/header :: header">TOP MENU</div>
 <!-- Body -->
 <div class="container-fluid">
-    <h1 th:text = "#{OperationsPageTitle}">VALUE</h1>
-    <p th:text ="#{WelcomeText}"/>
+    <br/>
+    <h1 th:text="#{OperationsPageTitle}">VALUE</h1>
+    <div class="btn-group-sm">
+        <a class="btn btn-outline-primary" href="/references/operations/new" role="button">Create Operation</a>
+        <a class="btn btn-outline-primary" href="/" role="button">Return to Main</a>
+    </div>
+    <br/>
+    <table class="table caption-top">
+        <caption>List of operations</caption>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Sub Operations</th>
+            <th>User modified</th>
+            <th>Date modified</th>
+            <th>Operations</th>
+        </tr>
+        <tr th:each="operation:${operationsList}">
+            <td th:text="${operation.getId()}">VALUE</td>
+            <td th:text="${operation.getName()}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td>
+                <div class="btn-group">
+                    <form th:action="@{/references/operations/{id}(id=${operation.getId()})}" th:method="PUT">
+                        <input class="btn btn-outline-primary" type="submit" value="Edit">
+                    </form>
+                    <form th:action="@{/references/operations/{id}(id=${operation.getId()})}" th:method="DELETE">
+                        <input class="btn btn-outline-danger" type="submit" value="Delete">
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
 </div>
 <!-- Bootstrap script -->
-<script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js" th:href="@{../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
+<script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
+        th:href="@{../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
 </body>
 </html>
