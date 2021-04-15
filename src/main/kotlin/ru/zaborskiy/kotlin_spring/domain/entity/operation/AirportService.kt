@@ -3,14 +3,14 @@ package ru.zaborskiy.kotlin_spring.domain.entity.operation
 import javax.persistence.*
 
 @Entity
-@Table(name = "operations")
-class Operation {
+@Table(name = "services")
+class AirportService {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "operation_id")
+    @Column(name = "service_id")
     var id: Long = 0L
 
-    @Column(name = "operation_name")
+    @Column(name = "service_name")
     var name: String = ""
 
     @Column(name = "user_modified")

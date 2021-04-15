@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link type="text/css" rel="stylesheet" href="../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
           th:href="@{../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
-    <script src="../../webjars/jquery/3.5.1/jquery.min.js" th:href="@{../../webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script src="../../webjars/jquery/3.5.1/jquery.min.js"
+            th:href="@{../../webjars/jquery/3.5.1/jquery.min.js}"></script>
 </head>
 
 <body>
@@ -15,10 +16,26 @@
 <div th:replace="fragments/header :: header">TOP MENU</div>
 <!-- Body -->
 <div class="container-fluid">
-    <h1 th:text = "#{ServiceFormTitle}" align="right">VALUE</h1>
-    <p th:text ="#{WelcomeText}"/>
+    <br/>
+    <h1 th:text="#{ServiceFormTitle}">VALUE</h1>
+    <div class="btn-group-sm">
+        <a class="btn btn-outline-primary" href="/references/services" role="button">Return to Service list</a>
+        <a class="btn btn-outline-primary" href="/" role="button">Return to Main</a>
+    </div>
+    <br/>
+    <form th:action="@{/references/services}" th:object="${airportService}" method="POST">
+        <input type="hidden" th:field="*{id}">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Name</span>
+            <input type="text" class="form-control" th:field="*{name}"
+                   aria-describedby="basic-addon1">
+        </div>
+        <br/>
+        <input type="submit" class="btn btn-success" value="OK">
+    </form>
 </div>
 <!-- Bootstrap script -->
-<script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js" th:href="@{../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
+<script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
+        th:href="@{../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
 </body>
 </html>

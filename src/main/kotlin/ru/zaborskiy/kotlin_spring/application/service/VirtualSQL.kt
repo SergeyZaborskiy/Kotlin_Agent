@@ -5,7 +5,7 @@ import ru.zaborskiy.kotlin_spring.domain.entity.Airport
 import ru.zaborskiy.kotlin_spring.domain.entity.Flight
 import ru.zaborskiy.kotlin_spring.domain.entity.Schedule
 import ru.zaborskiy.kotlin_spring.domain.entity.operation.Operation
-import ru.zaborskiy.kotlin_spring.domain.entity.operation.Service
+import ru.zaborskiy.kotlin_spring.domain.entity.operation.AirportService
 import ru.zaborskiy.kotlin_spring.domain.entity.operation.SubOperation
 
 class VirtualSQL {
@@ -21,7 +21,7 @@ class VirtualSQL {
     var listOfSubOperations = mutableListOf<SubOperation>()
         get() = field
 
-    var listOfServices = mutableListOf<Service>()
+    var listOfServices = mutableListOf<AirportService>()
         get() = field
 
     var listOfFlight = mutableListOf<Flight>()
@@ -47,8 +47,8 @@ class VirtualSQL {
         listOfSubOperations.add(subOperation)
     }
 
-    fun saveOrUpdateService(service: Service){
-        listOfServices.add(service)
+    fun saveOrUpdateService(airportService: AirportService){
+        listOfServices.add(airportService)
     }
 
     fun saveOrUpdateSchedule(schedule: Schedule){

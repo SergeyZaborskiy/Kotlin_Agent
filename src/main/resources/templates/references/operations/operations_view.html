@@ -36,9 +36,9 @@
         <tr th:each="operation:${operationsList}">
             <td th:text="${operation.getId()}">VALUE</td>
             <td th:text="${operation.getName()}">VALUE</td>
-            <td th:text="#{NotFoundText}">VALUE</td>
-            <td th:text="#{NotFoundText}">VALUE</td>
-            <td th:text="#{NotFoundText}">VALUE</td>
+            <td th:text="#{NotFoundText}">NOT FOUND</td>
+            <td th:text="${operation.getUserModified()}">VALUE</td>
+            <td th:text="${operation.getTimeDateModified()}">VALUE</td>
             <td>
                 <div class="btn-group">
                     <form th:action="@{/references/operations/{id}(id=${operation.getId()})}" th:method="PUT">
