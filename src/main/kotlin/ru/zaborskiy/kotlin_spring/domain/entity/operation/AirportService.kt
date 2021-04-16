@@ -18,4 +18,8 @@ class AirportService {
 
     @Column(name = "time_date_modified")
     var timeDateModified: String = ""
+
+/*    @OneToMany(mappedBy = "services", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    var subOperationList: MutableList<SubOperation> = mutableListOf()*/
+
 }

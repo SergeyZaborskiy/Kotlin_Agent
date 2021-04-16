@@ -1,12 +1,11 @@
 package ru.zaborskiy.kotlin_spring.application.controller.reference
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import ru.zaborskiy.kotlin_spring.application.service.OperationService
-import ru.zaborskiy.kotlin_spring.application.service.VirtualSQL
+import ru.zaborskiy.kotlin_spring.application.service.SubOperationService
 import ru.zaborskiy.kotlin_spring.domain.entity.operation.Operation
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -19,11 +18,6 @@ class OperationReferenceController(private val operationService: OperationServic
     fun getOperationsList(model: Model): String {
         model.addAttribute("operationsList", operationService.all())
         return "/references/operations/operations_view"
-    }
-
-    @GetMapping("/{:id}")
-    fun getOperationById(model: Model, @PathVariable id: String): String {
-        return "/references/operations/operation_form"
     }
 
     @GetMapping("/new")
@@ -43,9 +37,9 @@ class OperationReferenceController(private val operationService: OperationServic
         return "redirect:/references/operations"
     }
 
-    @PutMapping("/{id}")
-    fun editOperation(@PathVariable id: Long, model: Model): String {
-        var operation = operationService.get(id)
+    @GetMapping("/{operationId}")
+    fun editOperation(@PathVariable operationId: Long, model: Model): String {
+        var operation = operationService.get(operationId)
         model.addAttribute(operation)
         return "/references/operations/operation_form"
     }
@@ -55,5 +49,4 @@ class OperationReferenceController(private val operationService: OperationServic
         operationService.remove(id)
         return "redirect:/references/operations"
     }
-
 }

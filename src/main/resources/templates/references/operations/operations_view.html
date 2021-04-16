@@ -36,12 +36,13 @@
         <tr th:each="operation:${operationsList}">
             <td th:text="${operation.getId()}">VALUE</td>
             <td th:text="${operation.getName()}">VALUE</td>
-            <td th:text="#{NotFoundText}">NOT FOUND</td>
+            <td><p th:each="subOperation:${operation.getSubOperationList()}" th:text="${subOperation.getName()}"></p>
+            </td>
             <td th:text="${operation.getUserModified()}">VALUE</td>
             <td th:text="${operation.getTimeDateModified()}">VALUE</td>
             <td>
                 <div class="btn-group">
-                    <form th:action="@{/references/operations/{id}(id=${operation.getId()})}" th:method="PUT">
+                    <form th:action="@{/references/operations/{id}(id=${operation.getId()})}" th:method="GET">
                         <input class="btn btn-outline-primary" type="submit" value="Edit">
                     </form>
                     <form th:action="@{/references/operations/{id}(id=${operation.getId()})}" th:method="DELETE">

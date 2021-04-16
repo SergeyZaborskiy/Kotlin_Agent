@@ -19,5 +19,4 @@ class ScheduleReferenceController {
     fun showOperationForm(model: Model, @PathVariable id: String): String {
         return "/references/schedules/schedule_form"
     }
-
 }

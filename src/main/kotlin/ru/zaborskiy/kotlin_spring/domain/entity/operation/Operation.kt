@@ -18,4 +18,7 @@ class Operation {
 
     @Column(name = "time_date_modified")
     var timeDateModified: String = ""
+
+    @OneToMany(mappedBy = "operation", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    var subOperationList: MutableList<SubOperation> = mutableListOf()
 }
