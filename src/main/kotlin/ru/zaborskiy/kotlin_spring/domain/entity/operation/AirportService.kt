@@ -4,14 +4,16 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "services")
-class AirportService {
+class AirportService(
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "service_id")
-    var id: Long = 0L
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "airportService_id")
+    var id: Long = 0L,
 
-    @Column(name = "service_name")
+    @Column(name = "airportService_name")
     var name: String = ""
+
+) {
 
     @Column(name = "user_modified")
     var userModified: String = ""
@@ -19,7 +21,18 @@ class AirportService {
     @Column(name = "time_date_modified")
     var timeDateModified: String = ""
 
-/*    @OneToMany(mappedBy = "services", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
-    var subOperationList: MutableList<SubOperation> = mutableListOf()*/
+    @ManyToMany
+    @JoinTable(
+        name = "subOperation_airportService",
+        joinColumns = [JoinColumn(name = "subOperation_id")],
+        inverseJoinColumns = [JoinColumn(name = "airportService_id")]
+    )
+    var subOperationList: MutableList<SubOperation> = mutableListOf()
+
+
+    //Functions
+    fun addSubOperationToService(subOperation: SubOperation) {
+        subOperationList.add(subOperation)
+    }
 
 }

@@ -18,29 +18,34 @@
 <div class="container-fluid">
     <br/>
     <h1 th:text="#{OperationFormTitle}">VALUE</h1>
+    <!-- Navigate buttons -->
     <div class="btn-group-sm">
         <a class="btn btn-outline-primary" href="/references/operations" role="button">Return to Operation list</a>
         <a class="btn btn-outline-primary" href="/" role="button">Return to Main</a>
     </div>
     <br/>
     <!-- Operation form -->
-    <form th:action="@{/references/operations}" th:object="${operation}" method="POST">
-        <input type="hidden" th:field="*{id}">
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">Name</span>
-            <input type="text" class="form-control" th:field="*{name}"
-                   aria-describedby="basic-addon1">
-        </div>
-        <br/>
-        <input type="submit" class="btn btn-success" value="OK">
-    </form>
+    <div>
+        <p>Редактировать название операции</p>
+        <form th:action="@{/references/operations}" th:object="${returnedOperation}" method="POST">
+            <input type="hidden" th:field="*{id}">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Операция</span>
+                <input type="text" class="form-control" th:field="*{name}" aria-describedby="basic-addon1">
+            </div>
+            <br/>
+            <input type="submit" class="btn btn-success" value="Сохранить">
+        </form>
+    </div>
     <br/>
-    <!-- SubOperation list -->
-    <div class="input-group mb-3">
+    <!-- SubOperation list table -->
+    <div>
+        <hr/>
+        <br/>
         <p>Список подгрупп операции</p>
         <br/>
         <table class="table caption-top">
-            <tr th:each="subOperation:${operation.getSubOperationList()}">
+            <tr th:each="subOperation:${returnedOperation.getSubOperationList()}">
                 <td th:text="${subOperation.getName()}">VALUE</td>
                 <td>
                     <form th:action="@{/references/subOperations/{subOperationId}(subOperationId=${subOperation.getId()})}" th:method="DELETE">
@@ -50,7 +55,20 @@
             </tr>
         </table>
     </div>
-    <br/>
+    <hr/>
+    <!-- SubOperation adding form -->
+    <div>
+        <p>Добавить новую подгруппу</p>
+        <form th:action="@{/references/subOperations/new}" th:object="${newSubOperation}" method="POST">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon2">Подгруппа</span>
+                <input type="text" class="form-control" th:field="*{name}" aria-describedby="basic-addon2">
+                <input type="hidden" th:value="${returnedOperation.id}" name="operation">
+            </div>
+            <br/>
+            <input type="submit" class="btn btn-success" value="Добавить">
+        </form>
+    </div>
 </div>
 <!-- Bootstrap script -->
 <script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js"

@@ -6,14 +6,14 @@ import javax.persistence.*
 @Table(name = "sub_operations")
 data class SubOperation(
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "sub_operations_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subOperations_id")
     var id: Long = 0L,
 
-    @Column(name = "sub_operations_name")
+    @Column(name = "subOperations_name")
     var name: String = "",
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     @JoinColumn(name = "operation_id")
     var operation: Operation = Operation(),
 
@@ -24,4 +24,17 @@ data class SubOperation(
 
     @Column(name = "time_date_modified")
     var timeDateModified: String = ""
+
+    @ManyToMany
+    @JoinTable(
+        name = "subOperation_airportService",
+        joinColumns = [JoinColumn(name = "airportService_id")],
+        inverseJoinColumns = [JoinColumn(name = "subOperation_id")]
+    )
+    var airportServiceList: MutableList<AirportService> = mutableListOf()
+
+    //Functions
+    fun addSubOperationToService(airportService: AirportService) {
+        airportServiceList.add(airportService)
+    }
 }

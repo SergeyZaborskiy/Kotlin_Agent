@@ -6,7 +6,7 @@ import javax.persistence.*
 @Table(name = "operations")
 class Operation {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "operation_id")
     var id: Long = 0L
 
@@ -19,6 +19,17 @@ class Operation {
     @Column(name = "time_date_modified")
     var timeDateModified: String = ""
 
-    @OneToMany(mappedBy = "operation", cascade = [CascadeType.ALL], fetch = FetchType.EAGER)
+    @OneToMany(
+        mappedBy = "operation",
+        cascade = [CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST]
+    )
     var subOperationList: MutableList<SubOperation> = mutableListOf()
+
+
+    //Function
+    fun addSubOperationToOperation(subOperation: SubOperation) {
+        subOperationList.add(subOperation)
+        subOperation.operation = this
+    }
+
 }
