@@ -25,7 +25,7 @@ data class SubOperation(
     @Column(name = "time_date_modified")
     var timeDateModified: String = ""
 
-    @ManyToMany
+    @ManyToMany(cascade = [CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST])
     @JoinTable(
         name = "subOperation_airportService",
         joinColumns = [JoinColumn(name = "airportService_id")],

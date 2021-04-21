@@ -11,8 +11,7 @@ import javax.annotation.PostConstruct
 
 @Configuration
 class DemoSource(
-    private val operationService: OperationService,
-    private val airportServiceService: AirportServiceService
+    private val operationService: OperationService
 ) {
 
     @PostConstruct
@@ -44,10 +43,6 @@ class DemoSource(
         operation4.addSubOperationToOperation(subOperation6)
         operation4.addSubOperationToOperation(subOperation7)
 
-        operationService.add(operation1)
-        operationService.add(operation2)
-        operationService.add(operation3)
-        operationService.add(operation4)
 
         //Services demo
         var service1 = AirportService(name = "Осмотр МС и прием воздушного судна на место стоянки")
@@ -59,13 +54,30 @@ class DemoSource(
         var service7 = AirportService(name = "Предполётный осмотр ВС")
         var service8 = AirportService(name = "Наблюдение за запуском двигателей")
 
-        airportServiceService.add(service1)
-        airportServiceService.add(service2)
-        airportServiceService.add(service3)
-        airportServiceService.add(service4)
-        airportServiceService.add(service5)
-        airportServiceService.add(service6)
-        airportServiceService.add(service7)
-        airportServiceService.add(service8)
+        subOperation1.addSubOperationToService(service1)
+        subOperation1.addSubOperationToService(service2)
+        subOperation1.addSubOperationToService(service3)
+        subOperation1.addSubOperationToService(service4)
+        subOperation1.addSubOperationToService(service5)
+        subOperation1.addSubOperationToService(service6)
+        subOperation1.addSubOperationToService(service7)
+        subOperation1.addSubOperationToService(service8)
+
+        subOperation2.addSubOperationToService(service1)
+        subOperation2.addSubOperationToService(service2)
+        subOperation2.addSubOperationToService(service4)
+        subOperation2.addSubOperationToService(service5)
+        subOperation2.addSubOperationToService(service6)
+        subOperation2.addSubOperationToService(service7)
+        subOperation2.addSubOperationToService(service8)
+
+
+        //Save demo
+        operationService.add(operation1)
+        operationService.add(operation2)
+        operationService.add(operation3)
+        operationService.add(operation4)
+
+
     }
 }

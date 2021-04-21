@@ -7,7 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link type="text/css" rel="stylesheet" href="../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
           th:href="@{../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
-    <script src="../../webjars/jquery/3.5.1/jquery.min.js" th:href="@{../../webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <script src="../../webjars/jquery/3.5.1/jquery.min.js"
+            th:href="@{../../webjars/jquery/3.5.1/jquery.min.js}"></script>
 </head>
 
 <body>
@@ -16,7 +17,7 @@
 <!-- Body -->
 <div class="container-fluid">
     <br/>
-    <h1 th:text = "#{ServicesPageTitle}">VALUE</h1>
+    <h1 th:text="#{ServicesPageTitle}">VALUE</h1>
     <div class="btn-group-sm">
         <a class="btn btn-outline-primary" href="/references/services/new" role="button">Create Service</a>
         <a class="btn btn-outline-primary" href="/" role="button">Return to Main</a>
@@ -35,7 +36,8 @@
         <tr th:each="airportService:${airportServiceList}">
             <td th:text="${airportService.getId()}">VALUE</td>
             <td th:text="${airportService.getName()}">VALUE</td>
-            <td th:text="#{NotFoundText}">NOT FOUND</td>
+            <td><p th:each="subOperation:${airportService.getSubOperationList()}" th:text="${subOperation.getName()}"/>
+            </td>
             <td th:text="${airportService.getUserModified()}">VALUE</td>
             <td th:text="${airportService.getTimeDateModified()}">VALUE</td>
             <td>
@@ -52,6 +54,7 @@
     </table>
 </div>
 <!-- Bootstrap script -->
-<script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js" th:href="@{../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
+<script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
+        th:href="@{../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
 </body>
 </html>
