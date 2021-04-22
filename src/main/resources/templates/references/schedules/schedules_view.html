@@ -29,18 +29,14 @@
             </div>
             <select class="custom-select" id="inputGroupSelect01" name="airport">
                 <option selected disabled>Выбрать...</option>
-                <option value="1">Один</option>
-                <option value="2">Два</option>
-                <option value="3">Три</option>
+                <option th:each="airport:${airports}" th:text="${airport.name}">VALUE</option>
             </select>
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect02">Airplane</label>
             </div>
             <select class="custom-select" id="inputGroupSelect02" name="airplane">
                 <option selected disabled>Выбрать...</option>
-                <option value="1">Один</option>
-                <option value="2">Два</option>
-                <option value="3">Три</option>
+                <option th:each="aircraft:${aircrafts}" th:text ="${aircraft.name}">Один</option>
             </select>
         </div>
         <input type="submit" value="OK" class="btn btn-outline-primary">

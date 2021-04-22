@@ -45,7 +45,7 @@
         <p>Список подгрупп операции</p>
         <br/>
         <table class="table caption-top">
-            <tr th:each="subOperation:${returnedOperation.getSubOperationList()}">
+            <tr th:each="subOperation:${returnedOperation.getListOfSubOperations()}">
                 <td th:text="${subOperation.getName()}">VALUE</td>
                 <td>
                     <form th:action="@{/references/subOperations/{subOperationId}(subOperationId=${subOperation.getId()})}" th:method="DELETE">

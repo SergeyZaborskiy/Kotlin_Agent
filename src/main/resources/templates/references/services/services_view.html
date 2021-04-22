@@ -36,7 +36,7 @@
         <tr th:each="airportService:${airportServiceList}">
             <td th:text="${airportService.getId()}">VALUE</td>
             <td th:text="${airportService.getName()}">VALUE</td>
-            <td><p th:each="subOperation:${airportService.getSubOperationList()}" th:text="${subOperation.getName()}"/>
+            <td><p th:each="subOperation:${airportService.getListOfSubOperation()}" th:text="${subOperation.getName()}"/>
             </td>
             <td th:text="${airportService.getUserModified()}">VALUE</td>
             <td th:text="${airportService.getTimeDateModified()}">VALUE</td>

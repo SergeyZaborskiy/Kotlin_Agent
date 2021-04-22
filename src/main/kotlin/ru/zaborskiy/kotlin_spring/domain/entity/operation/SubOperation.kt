@@ -11,13 +11,9 @@ data class SubOperation(
     var id: Long = 0L,
 
     @Column(name = "subOperations_name")
-    var name: String = "",
+    var name: String = ""
 
-    @ManyToOne
-    @JoinColumn(name = "operation_id")
-    var operation: Operation = Operation(),
-
-    ) {
+) {
 
     @Column(name = "user_modified")
     var userModified: String = ""
@@ -25,16 +21,21 @@ data class SubOperation(
     @Column(name = "time_date_modified")
     var timeDateModified: String = ""
 
+    @ManyToOne
+    @JoinColumn(name = "operation_id")
+    var operation: Operation = Operation()
+
     @ManyToMany(cascade = [CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST])
     @JoinTable(
         name = "subOperation_airportService",
         joinColumns = [JoinColumn(name = "airportService_id")],
         inverseJoinColumns = [JoinColumn(name = "subOperation_id")]
     )
-    var airportServiceList: MutableList<AirportService> = mutableListOf()
+    var airportProductList: MutableList<AirportProduct> = mutableListOf()
 
     //Functions
-    fun addSubOperationToService(airportService: AirportService) {
-        airportServiceList.add(airportService)
+    fun addSubOperationToService(airportProduct: AirportProduct) {
+        airportProductList.add(airportProduct)
     }
+
 }

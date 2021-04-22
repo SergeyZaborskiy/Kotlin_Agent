@@ -1,10 +1,11 @@
 package ru.zaborskiy.kotlin_spring.domain.entity.operation
 
+import ru.zaborskiy.kotlin_spring.domain.entity.Schedule
 import javax.persistence.*
 
 @Entity
 @Table(name = "services")
-class AirportService(
+class AirportProduct(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "airportService_id")
@@ -27,12 +28,11 @@ class AirportService(
         joinColumns = [JoinColumn(name = "subOperation_id")],
         inverseJoinColumns = [JoinColumn(name = "airportService_id")]
     )
-    var subOperationList: MutableList<SubOperation> = mutableListOf()
-
+    var listOfSubOperation: MutableList<SubOperation> = mutableListOf()
 
     //Functions
     fun addSubOperationToService(subOperation: SubOperation) {
-        subOperationList.add(subOperation)
+        listOfSubOperation.add(subOperation)
     }
 
 }

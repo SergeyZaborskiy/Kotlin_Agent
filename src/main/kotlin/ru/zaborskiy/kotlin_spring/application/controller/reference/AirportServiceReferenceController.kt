@@ -1,23 +1,21 @@
 package ru.zaborskiy.kotlin_spring.application.controller.reference
 
-import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
-import ru.zaborskiy.kotlin_spring.application.service.AirportServiceService
-import ru.zaborskiy.kotlin_spring.domain.entity.operation.AirportService
-import ru.zaborskiy.kotlin_spring.domain.entity.operation.Operation
+import ru.zaborskiy.kotlin_spring.application.service.AirportProductService
+import ru.zaborskiy.kotlin_spring.domain.entity.operation.AirportProduct
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @Controller
 @RequestMapping("/references/services")
-class AirportServiceReferenceController(private val airportServiceService: AirportServiceService) {
+class AirportServiceReferenceController(private val airportProductService: AirportProductService) {
 
     @GetMapping
     fun showServicesView(model: Model): String {
-        model.addAttribute("airportServiceList", airportServiceService.all())
+        model.addAttribute("airportServiceList", airportProductService.all())
         return "/references/services/services_view"
     }
 
@@ -28,31 +26,31 @@ class AirportServiceReferenceController(private val airportServiceService: Airpo
 
     @GetMapping("/new")
     fun getOperationForm(model: Model): String {
-        var airportService = AirportService()
+        var airportService = AirportProduct()
         model.addAttribute("airportService", airportService)
         return "/references/services/service_form"
     }
 
     @PostMapping
-    fun addOperation(@ModelAttribute airportService: AirportService): String {
+    fun addOperation(@ModelAttribute airportProduct: AirportProduct): String {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         var auth = SecurityContextHolder.getContext().authentication
-        airportService.timeDateModified = LocalDateTime.now().format(formatter)
-        airportService.userModified = auth.name
-        airportServiceService.add(airportService)
+        airportProduct.timeDateModified = LocalDateTime.now().format(formatter)
+        airportProduct.userModified = auth.name
+        airportProductService.add(airportProduct)
         return "redirect:/references/services"
     }
 
     @PutMapping("/{id}")
     fun editOperation(@PathVariable id: Long, model: Model): String {
-        var airportService = airportServiceService.get(id)
+        var airportService = airportProductService.get(id)
         model.addAttribute(airportService)
         return "/references/services/service_form"
     }
 
     @DeleteMapping("/{id}")
     fun deleteOperation(@PathVariable id: Long): String {
-        airportServiceService.remove(id)
+        airportProductService.remove(id)
         return "redirect:/references/services"
     }
 }
