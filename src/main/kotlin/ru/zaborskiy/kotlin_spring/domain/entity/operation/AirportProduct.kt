@@ -1,6 +1,5 @@
 package ru.zaborskiy.kotlin_spring.domain.entity.operation
 
-import ru.zaborskiy.kotlin_spring.domain.entity.Schedule
 import javax.persistence.*
 
 @Entity
@@ -22,17 +21,23 @@ class AirportProduct(
     @Column(name = "time_date_modified")
     var timeDateModified: String = ""
 
-    @ManyToMany(cascade = [CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST])
+    @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(
         name = "subOperation_airportService",
         joinColumns = [JoinColumn(name = "subOperation_id")],
         inverseJoinColumns = [JoinColumn(name = "airportService_id")]
     )
-    var listOfSubOperation: MutableList<SubOperation> = mutableListOf()
+    var subOperations: MutableList<SubOperation> = mutableListOf()
 
-    //Functions
-    fun addSubOperationToService(subOperation: SubOperation) {
-        listOfSubOperation.add(subOperation)
+    //Functions for lists
+    fun addSubOperation(subOperation: SubOperation) {
+        if (subOperations.contains(subOperation)) return
+        else subOperations.add(subOperation)
+    }
+
+    fun removeSubOperation(subOperation: SubOperation) {
+        if (!subOperations.contains(subOperation)) return
+        else subOperations.remove(subOperation)
     }
 
 }

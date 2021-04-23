@@ -36,7 +36,7 @@
         <tr th:each="operation:${operationsList}">
             <td th:text="${operation.getId()}">VALUE</td>
             <td th:text="${operation.getName()}">VALUE</td>
-            <td><p th:each="subOperation:${operation.getListOfSubOperations()}" th:text="${subOperation.getName()}"></p>
+            <td><p th:each="subOperation:${operation.getSubOperations()}" th:text="${subOperation.getName()}"></p>
             </td>
             <td th:text="${operation.getUserModified()}">VALUE</td>
             <td th:text="${operation.getTimeDateModified()}">VALUE</td>

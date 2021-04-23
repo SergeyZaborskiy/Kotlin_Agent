@@ -24,18 +24,37 @@ data class SubOperation(
     @ManyToOne
     @JoinColumn(name = "operation_id")
     var operation: Operation = Operation()
+        set(value) {
+            if (sameAsCurrent(field, value)) return
+            else field = value
+        }
 
-    @ManyToMany(cascade = [CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST])
+    @ManyToMany(cascade = [CascadeType.ALL])
     @JoinTable(
         name = "subOperation_airportService",
         joinColumns = [JoinColumn(name = "airportService_id")],
         inverseJoinColumns = [JoinColumn(name = "subOperation_id")]
     )
-    var airportProductList: MutableList<AirportProduct> = mutableListOf()
+    var airportProducts: MutableList<AirportProduct> = mutableListOf()
 
-    //Functions
-    fun addSubOperationToService(airportProduct: AirportProduct) {
-        airportProductList.add(airportProduct)
+    //Functions for lists
+    fun addAirportProduct(airportProduct: AirportProduct) {
+        if (airportProducts.contains(airportProduct)) return
+        else {
+            airportProducts.add(airportProduct)
+        }
     }
 
+    fun removeAirportProduct(airportProduct: AirportProduct) {
+        if (!airportProducts.contains(airportProduct)) return
+        else {
+            airportProducts.remove(airportProduct)
+        }
+    }
 }
+
+//Functions
+private fun sameAsCurrent(operation: Operation, newOperation: Operation): Boolean {
+    return operation == null || newOperation == null || operation == newOperation
+}
+
