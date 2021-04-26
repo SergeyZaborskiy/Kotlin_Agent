@@ -29,7 +29,7 @@ data class SubOperation(
             else field = value
         }
 
-    @ManyToMany(cascade = [CascadeType.ALL])
+    @ManyToMany(cascade = [CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH, CascadeType.REFRESH])
     @JoinTable(
         name = "subOperation_airportService",
         joinColumns = [JoinColumn(name = "airportService_id")],

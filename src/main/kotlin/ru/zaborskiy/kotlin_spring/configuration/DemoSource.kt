@@ -106,18 +106,18 @@ class DemoSource(
 
         scheduleService.add(schedule1)
 
-        subOperationService.save(subOperation1)
+        operationService.add(operation1)
+        operationService.add(operation2)
+        operationService.add(operation3)
+        operationService.add(operation4)
+
+/*        subOperationService.save(subOperation1)
         subOperationService.save(subOperation2)
         subOperationService.save(subOperation3)
         subOperationService.save(subOperation4)
         subOperationService.save(subOperation5)
         subOperationService.save(subOperation6)
-        subOperationService.save(subOperation7)
-
-        operationService.add(operation1)
-        operationService.add(operation2)
-        operationService.add(operation3)
-        operationService.add(operation4)
+        subOperationService.save(subOperation7)*/
 
     }
 }

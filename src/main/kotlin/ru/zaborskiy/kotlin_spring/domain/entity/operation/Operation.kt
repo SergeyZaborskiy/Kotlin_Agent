@@ -42,6 +42,7 @@ data class Operation(
         if (subOperations.contains(subOperation)) return
         else {
             subOperations.add(subOperation)
+            subOperation.operation=this
         }
     }
 

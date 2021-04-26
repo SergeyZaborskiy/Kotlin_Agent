@@ -43,8 +43,8 @@ class AirportServiceReferenceController(private val airportProductService: Airpo
 
     @PutMapping("/{id}")
     fun editOperation(@PathVariable id: Long, model: Model): String {
-        var airportService = airportProductService.get(id)
-        model.addAttribute(airportService)
+        var airportProduct = airportProductService.get(id)
+        model.addAttribute("airportProduct", airportProduct)
         return "/references/services/service_form"
     }
 
