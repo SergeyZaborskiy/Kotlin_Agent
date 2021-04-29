@@ -5,13 +5,13 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import ru.zaborskiy.kotlin_spring.application.service.AirportProductService
-import ru.zaborskiy.kotlin_spring.domain.entity.operation.AirportProduct
+import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportItem
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
 @Controller
 @RequestMapping("/references/services")
-class AirportServiceReferenceController(private val airportProductService: AirportProductService) {
+class AirportItemController(private val airportProductService: AirportProductService) {
 
     @GetMapping
     fun showServicesView(model: Model): String {
@@ -26,18 +26,18 @@ class AirportServiceReferenceController(private val airportProductService: Airpo
 
     @GetMapping("/new")
     fun getOperationForm(model: Model): String {
-        var airportService = AirportProduct()
+        var airportService = AirportItem()
         model.addAttribute("airportService", airportService)
         return "/references/services/service_form"
     }
 
     @PostMapping
-    fun addOperation(@ModelAttribute airportProduct: AirportProduct): String {
+    fun addOperation(@ModelAttribute airportItem: AirportItem): String {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         var auth = SecurityContextHolder.getContext().authentication
-        airportProduct.timeDateModified = LocalDateTime.now().format(formatter)
-        airportProduct.userModified = auth.name
-        airportProductService.add(airportProduct)
+        airportItem.timeDateModified = LocalDateTime.now().format(formatter)
+        airportItem.userModified = auth.name
+        airportProductService.add(airportItem)
         return "redirect:/references/services"
     }
 

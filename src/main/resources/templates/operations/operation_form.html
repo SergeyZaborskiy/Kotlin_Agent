@@ -6,9 +6,9 @@
     <title th:text="#{OperationFormTitle}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link type="text/css" rel="stylesheet" href="../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
-          th:href="@{../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
-    <script src="../../webjars/jquery/3.5.1/jquery.min.js"
-            th:href="@{../../webjars/jquery/3.5.1/jquery.min.js}"></script>
+          th:href="@{../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
+    <script src="../webjars/jquery/3.5.1/jquery.min.js"
+            th:href="@{../webjars/jquery/3.5.1/jquery.min.js}"></script>
 </head>
 
 <body>
@@ -27,7 +27,7 @@
     <!-- Operation form -->
     <div>
         <p>Редактировать название операции</p>
-        <form th:action="@{/references/operations}" th:object="${returnedOperation}" method="POST">
+        <form th:action="@{/operations}" th:object="${returnedOperation}" method="POST">
             <input type="hidden" th:field="*{id}">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">Операция</span>
@@ -45,10 +45,10 @@
         <p>Список подгрупп операции</p>
         <br/>
         <table class="table caption-top">
-            <tr th:each="subOperation:${returnedOperation.getSubOperations()}">
+            <tr th:each="subOperation:${returnedOperation.getAirlineSubOperations()}">
                 <td th:text="${subOperation.getName()}">VALUE</td>
                 <td>
-                    <form th:action="@{/references/subOperations/{subOperationId}(subOperationId=${subOperation.getId()})}" th:method="DELETE">
+                    <form th:action="@{/operations/sub/{subOperationId}(subOperationId=${subOperation.getId()})}" th:method="DELETE">
                         <input class="btn btn-outline-danger" type="submit" value="Delete">
                     </form>
                 </td>
@@ -59,7 +59,7 @@
     <!-- SubOperation adding form -->
     <div>
         <p>Добавить новую подгруппу</p>
-        <form th:action="@{/references/subOperations/new}" th:object="${newSubOperation}" method="POST">
+        <form th:action="@{/operations/sub}" th:object="${newSubOperation}" method="POST">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon2">Подгруппа</span>
                 <input type="text" class="form-control" th:field="*{name}" aria-describedby="basic-addon2">
@@ -71,7 +71,7 @@
     </div>
 </div>
 <!-- Bootstrap script -->
-<script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
-        th:href="@{../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
+<script src="../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
+        th:href="@{../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
 </body>
 </html>

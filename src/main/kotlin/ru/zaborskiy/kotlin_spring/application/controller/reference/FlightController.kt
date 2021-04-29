@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 
 @Controller
-@RequestMapping("/references/flights")
+@RequestMapping("/flights")
 
-class FlightReferenceController {
+class FlightController {
     @GetMapping
     fun showFlightsView(model: Model): String {
-        return "/references/flights/flight_view"
+        return "/flights/flight_view"
     }
 
     @GetMapping("/{:id}")
     fun showFlightForm(model: Model, @PathVariable id: String): String {
-        return "/references/flights/flight_form"
+        return "/flights/flight_form"
     }
 }

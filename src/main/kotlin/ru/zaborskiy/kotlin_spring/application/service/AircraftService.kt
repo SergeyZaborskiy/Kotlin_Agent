@@ -2,7 +2,7 @@ package ru.zaborskiy.kotlin_spring.application.service
 
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
-import ru.zaborskiy.kotlin_spring.domain.entity.Aircraft
+import ru.zaborskiy.kotlin_spring.domain.entity.flight.Aircraft
 import ru.zaborskiy.kotlin_spring.domain.repository.AircraftRepository
 
 @Service

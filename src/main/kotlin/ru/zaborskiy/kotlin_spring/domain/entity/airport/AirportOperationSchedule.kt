@@ -1,11 +1,12 @@
-package ru.zaborskiy.kotlin_spring.domain.entity
+package ru.zaborskiy.kotlin_spring.domain.entity.airport
 
-import ru.zaborskiy.kotlin_spring.domain.entity.operation.Operation
+import ru.zaborskiy.kotlin_spring.domain.entity.operation.AirlineOperation
+import ru.zaborskiy.kotlin_spring.domain.entity.flight.Aircraft
 import javax.persistence.*
 
 @Entity
 @Table(name = "schedules")
-data class Schedule(
+data class AirportOperationSchedule(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_id")
@@ -35,12 +36,12 @@ data class Schedule(
         joinColumns = [JoinColumn(name = "schedule_id")],
         inverseJoinColumns = [JoinColumn(name = "operation_id")]
     )
-    var listOfOperation: MutableList<Operation> = mutableListOf()
+    var listOfAirlineOperation: MutableList<AirlineOperation> = mutableListOf()
 
 
     //Functions that add to lists
-    fun addOperationToList(operation: Operation) {
-        listOfOperation.add(operation)
+    fun addOperationToList(airlineOperation: AirlineOperation) {
+        listOfAirlineOperation.add(airlineOperation)
     }
 
     private fun sameAsCurrent(airport: Airport, newAirport: Airport): Boolean {

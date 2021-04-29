@@ -1,5 +1,6 @@
-package ru.zaborskiy.kotlin_spring.domain.entity
+package ru.zaborskiy.kotlin_spring.domain.entity.flight
 
+import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportOperationSchedule
 import javax.persistence.*
 
 @Entity
@@ -18,12 +19,12 @@ data class Aircraft(
         mappedBy = "airport",
         cascade = [CascadeType.ALL]
     )
-    var listOfSchedule: MutableList<Schedule> = mutableListOf()
+    var listOfAirportOperationSchedule: MutableList<AirportOperationSchedule> = mutableListOf()
 
     //Functions that add to lists
 
-    fun addScheduleToList(schedule: Schedule) {
-        listOfSchedule.add(schedule)
+    fun addScheduleToList(airportOperationSchedule: AirportOperationSchedule) {
+        listOfAirportOperationSchedule.add(airportOperationSchedule)
     }
 
 }

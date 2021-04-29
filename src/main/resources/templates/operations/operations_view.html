@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <title th:text="#{OperationsPageTitle}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link type="text/css" rel="stylesheet" href="../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
-          th:href="@{../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
-    <script src="../../webjars/jquery/3.5.1/jquery.min.js"
-            th:href="@{../../webjars/jquery/3.5.1/jquery.min.js}"></script>
+    <link type="text/css" rel="stylesheet" href="../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
+          th:href="@{../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
+    <script src="../webjars/jquery/3.5.1/jquery.min.js"
+            th:href="@{../webjars/jquery/3.5.1/jquery.min.js}"></script>
 </head>
 
 <body>
@@ -36,16 +36,16 @@
         <tr th:each="operation:${operationsList}">
             <td th:text="${operation.getId()}">VALUE</td>
             <td th:text="${operation.getName()}">VALUE</td>
-            <td><p th:each="subOperation:${operation.getSubOperations()}" th:text="${subOperation.getName()}"></p>
+            <td><p th:each="subOperation:${operation.getAirlineSubOperations()}" th:text="${subOperation.getName()}"></p>
             </td>
             <td th:text="${operation.getUserModified()}">VALUE</td>
             <td th:text="${operation.getTimeDateModified()}">VALUE</td>
             <td>
                 <div class="btn-group">
-                    <form th:action="@{/references/operations/{id}(id=${operation.getId()})}" th:method="GET">
+                    <form th:action="@{/operations/{id}(id=${operation.getId()})}" th:method="GET">
                         <input class="btn btn-outline-primary" type="submit" value="Edit">
                     </form>
-                    <form th:action="@{/references/operations/{id}(id=${operation.getId()})}" th:method="DELETE">
+                    <form th:action="@{/operations/{id}(id=${operation.getId()})}" th:method="DELETE">
                         <input class="btn btn-outline-danger" type="submit" value="Delete">
                     </form>
                 </div>
@@ -54,7 +54,7 @@
     </table>
 </div>
 <!-- Bootstrap script -->
-<script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
-        th:href="@{../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
+<script src="../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
+        th:href="@{../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
 </body>
 </html>

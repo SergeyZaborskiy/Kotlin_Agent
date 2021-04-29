@@ -1,10 +1,11 @@
 package ru.zaborskiy.kotlin_spring.domain.entity.operation
 
+import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportItem
 import javax.persistence.*
 
 @Entity
 @Table(name = "sub_operations")
-data class SubOperation(
+data class AirlineSubOperation(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subOperations_id")
@@ -21,31 +22,31 @@ data class SubOperation(
     @Column(name = "time_date_modified")
     var timeDateModified: String = ""
 
-    @ManyToOne
+    @ManyToOne(cascade = [CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST])
     @JoinColumn(name = "operation_id")
-    var operation: Operation = Operation()
+    var airlineOperation: AirlineOperation = AirlineOperation()
         set(value) {
             if (sameAsCurrent(field, value)) return
             else field = value
         }
 
-    @ManyToMany(cascade = [CascadeType.PERSIST,CascadeType.MERGE,CascadeType.DETACH, CascadeType.REFRESH])
+    @ManyToMany
     @JoinTable(
         name = "subOperation_airportService",
         joinColumns = [JoinColumn(name = "airportService_id")],
         inverseJoinColumns = [JoinColumn(name = "subOperation_id")]
     )
-    var airportProducts: MutableList<AirportProduct> = mutableListOf()
+    var airportProducts: MutableList<AirportItem> = mutableListOf()
 
     //Functions for lists
-    fun addAirportProduct(airportProduct: AirportProduct) {
+    fun addAirportProduct(airportProduct: AirportItem) {
         if (airportProducts.contains(airportProduct)) return
         else {
             airportProducts.add(airportProduct)
         }
     }
 
-    fun removeAirportProduct(airportProduct: AirportProduct) {
+    fun removeAirportProduct(airportProduct: AirportItem) {
         if (!airportProducts.contains(airportProduct)) return
         else {
             airportProducts.remove(airportProduct)
@@ -54,7 +55,7 @@ data class SubOperation(
 }
 
 //Functions
-private fun sameAsCurrent(operation: Operation, newOperation: Operation): Boolean {
-    return operation == null || newOperation == null || operation == newOperation
+private fun sameAsCurrent(airlineOperation: AirlineOperation, newAirlineOperation: AirlineOperation): Boolean {
+    return airlineOperation == null || newAirlineOperation == null || airlineOperation == newAirlineOperation
 }
 

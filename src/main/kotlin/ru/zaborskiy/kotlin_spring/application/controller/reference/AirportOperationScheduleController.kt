@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
 import ru.zaborskiy.kotlin_spring.application.service.ScheduleService
-import ru.zaborskiy.kotlin_spring.domain.entity.Aircraft
-import ru.zaborskiy.kotlin_spring.domain.entity.Airport
+import ru.zaborskiy.kotlin_spring.domain.entity.flight.Aircraft
+import ru.zaborskiy.kotlin_spring.domain.entity.airport.Airport
 
 @Controller
 @RequestMapping("/references/schedules")
-class ScheduleReferenceController(private val scheduleService: ScheduleService) {
+class AirportOperationScheduleController(private val scheduleService: ScheduleService) {
 
     @GetMapping
     fun showOperationsView(model: Model): String {

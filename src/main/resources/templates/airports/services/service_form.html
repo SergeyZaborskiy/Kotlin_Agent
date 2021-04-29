@@ -23,7 +23,7 @@
         <a class="btn btn-outline-primary" href="/" role="button">Return to Main</a>
     </div>
     <br/>
-    <form th:action="@{/references/services}" th:object="${airportProduct}" method="POST">
+    <form th:action="@{/templates/references/services}" th:object="${airportProduct}" method="POST">
         <input type="hidden" th:field="*{id}">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Name</span>

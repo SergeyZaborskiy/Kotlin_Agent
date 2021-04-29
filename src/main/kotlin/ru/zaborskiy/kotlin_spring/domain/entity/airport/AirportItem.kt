@@ -1,10 +1,11 @@
-package ru.zaborskiy.kotlin_spring.domain.entity.operation
+package ru.zaborskiy.kotlin_spring.domain.entity.airport
 
+import ru.zaborskiy.kotlin_spring.domain.entity.operation.AirlineSubOperation
 import javax.persistence.*
 
 @Entity
 @Table(name = "services")
-class AirportProduct(
+class AirportItem(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "airportService_id")
@@ -27,15 +28,15 @@ class AirportProduct(
         joinColumns = [JoinColumn(name = "subOperation_id")],
         inverseJoinColumns = [JoinColumn(name = "airportService_id")]
     )
-    var subOperations: MutableList<SubOperation> = mutableListOf()
+    var subOperations: MutableList<AirlineSubOperation> = mutableListOf()
 
     //Functions for lists
-    fun addSubOperation(subOperation: SubOperation) {
+    fun addSubOperation(subOperation: AirlineSubOperation) {
         if (subOperations.contains(subOperation)) return
         else subOperations.add(subOperation)
     }
 
-    fun removeSubOperation(subOperation: SubOperation) {
+    fun removeSubOperation(subOperation: AirlineSubOperation) {
         if (!subOperations.contains(subOperation)) return
         else subOperations.remove(subOperation)
     }

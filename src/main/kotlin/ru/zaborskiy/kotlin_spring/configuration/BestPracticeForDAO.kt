@@ -1,7 +1,5 @@
 package ru.zaborskiy.kotlin_spring.configuration
 
-import ru.zaborskiy.kotlin_spring.domain.entity.operation.Operation
-
 class BestPracticeForDAO {
 
 /*    //OneToMany
