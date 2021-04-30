@@ -42,7 +42,7 @@ data class AirlineOperation(
         if (airlineSubOperations.contains(airlineSubOperation)) return
         else {
             airlineSubOperations.add(airlineSubOperation)
-            airlineSubOperation.airlineOperation=this
+            airlineSubOperation.airlineOperation = this
         }
     }
 

@@ -28,10 +28,8 @@ class OperationController(
     @GetMapping("/new")
     fun getOperationForm(model: Model): String {
         var operation = AirlineOperation()
-        model.addAttribute("returnedOperation", operation)
-        var subOperation = AirlineSubOperation()
-        model.addAttribute("newSubOperation", subOperation)
-        return "/operations/operation_form"
+        model.addAttribute("newOperation", operation)
+        return "/operations/operation_new"
     }
 
     @GetMapping("/{operationId}")
@@ -71,12 +69,11 @@ class OperationController(
     }
 
     @DeleteMapping("/sub/{subOperationId}")
-    fun deleteOperation(@PathVariable subOperationId: Long, request: HttpServletRequest, model: Model): String {
+    fun deleteSubOperation(@PathVariable subOperationId: Long, request: HttpServletRequest, model: Model): String {
         var temp = subOperationService.get(subOperationId)
         subOperationService.removeObj(temp)
         val referer = request.getHeader("Referer")
         return "redirect:$referer"
     }
-
 
 }

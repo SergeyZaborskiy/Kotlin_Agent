@@ -17,7 +17,13 @@ data class Airport(
     var icao: String = "",
 
     @Column(name = "airport_iata")
-    var iata: String = ""
+    var iata: String = "",
+
+    @Column(name = "airport_country")
+    var country: String = "",
+
+    @Column(name = "airport_city")
+    var city: String = "",
 ) {
 
     @OneToMany(

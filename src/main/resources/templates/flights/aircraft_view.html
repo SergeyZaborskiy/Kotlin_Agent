@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title th:text="#{FlightsPageTitle}"></title>
+    <title th:text="#{AircraftTitle}"></title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link type="text/css" rel="stylesheet" href="../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
           th:href="@{../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
@@ -17,32 +17,33 @@
 <!-- Body -->
 <div class="container-fluid">
     <br/>
-    <h1 th:text="#{FlightsPageTitle}">VALUE</h1>
+    <h1 th:text="#{AircraftTitle}">VALUE</h1>
     <div class="btn-group-sm">
-        <a class="btn btn-outline-primary" href="/flights/aircrafts/" role="button" th:text="#{AircraftButton}">Aircraft
-            info</a>
+        <a class="btn btn-outline-primary" href="/flights/aircrafts/new" role="button" th:text="#{NewAircraftButton}">Add
+            aircraft</a>
+        <a class="btn btn-outline-primary" href="/flights" role="button" th:text="#{FlightsPageButton}">Return to
+            flights</a>
         <a class="btn btn-outline-primary" href="/" role="button" th:text="#{MainPageButton}">Return to Main</a>
     </div>
     <br/>
     <table class="table caption-top">
         <caption>Список рейсов</caption>
         <tr>
-            <th>Номер рейса</th>
-            <th>Тип ВС</th>
-            <th>Номер борта</th>
-            <th>Вид обслуживания</th>
-            <th>Время обслуживания</th>
-            <th>Дата обслуживания</th>
+            <th>Название ВС</th>
             <th>Действия</th>
         </tr>
-        <tr>
-            <td th:text="#{NotFoundText}">VALUE</td>
-            <td th:text="#{NotFoundText}">VALUE</td>
-            <td th:text="#{NotFoundText}">VALUE</td>
-            <td th:text="#{NotFoundText}">VALUE</td>
-            <td th:text="#{NotFoundText}">VALUE</td>
-            <td th:text="#{NotFoundText}">VALUE</td>
-            <td th:text="#{NotFoundText}">VALUE</td>
+        <tr th:each="aircraft:${aircrafts}">
+            <td th:text="${aircraft.name}">VALUE</td>
+            <td>
+                <div class="btn-group">
+                    <form th:action="@{/flights/aircrafts/{id}(id=${aircraft.getId()})}" th:method="GET">
+                        <input class="btn btn-outline-primary" type="submit" value="Подробнее">
+                    </form>
+                    <form th:action="@{/flights/aircrafts/{id}(id=${aircraft.getId()})}" th:method="DELETE">
+                        <input class="btn btn-outline-danger" type="submit" value="Удалить">
+                    </form>
+                </div>
+            </td>
         </tr>
     </table>
 </div>

@@ -28,6 +28,7 @@ data class AirlineSubOperation(
         set(value) {
             if (sameAsCurrent(field, value)) return
             else field = value
+            airlineOperation.addSubOperation(this)
         }
 
     @ManyToMany

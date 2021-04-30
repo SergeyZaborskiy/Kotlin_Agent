@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title th:text="#{AirportFormTitle}"></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link type="text/css" rel="stylesheet" href="../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
+        th:href="@{../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
+  <script src="../webjars/jquery/3.6.0/jquery.min.js"
+          th:href="@{../webjars/jquery/3.6.0/jquery.min.js}"></script>
+</head>
+
+<body>
+<!-- Header -->
+<div th:replace="fragments/header :: header">TOP MENU</div>
+<!-- Body -->
+<div class="container-fluid">
+  <br/>
+  <h1 th:text="#{AirportFormTitle}">VALUE</h1>
+  <!-- Navigate buttons -->
+  <div class="btn-group-sm">
+    <a class="btn btn-outline-primary" href="/airports" role="button">Список аэропортов</a>
+    <a class="btn btn-outline-primary" href="/" role="button" th:text="#{MainPageButton}">Return to Main</a>
+  </div>
+  <br/>
+  <!-- Form -->
+  <div>
+    <p>Редактировать свойства аэропорта</p>
+    <br/>
+    <form th:action="@{/airports/{id}(id=*{id})}" th:object="${returnedAirport}" th:method="PUT">
+      <input type="hidden" th:field="*{id}">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Название АП</span>
+        <input type="text" class="form-control" th:field="*{name}" aria-describedby="basic-addon1">
+        <span class="input-group-text" id="basic-addon2">ICAO</span>
+        <input type="text" class="form-control" th:field="*{icao}" aria-describedby="basic-addon2">
+        <span class="input-group-text" id="basic-addon3">Страна</span>
+        <input type="text" class="form-control" th:field="*{country}" aria-describedby="basic-addon3">
+        <span class="input-group-text" id="basic-addon4">Город</span>
+        <input type="text" class="form-control" th:field="*{city}" aria-describedby="basic-addon4">
+      </div>
+      <br/>
+      <input type="submit" class="btn btn-success" value="Сохранить">
+    </form>
+  </div>
+  <br/>
+  <!-- Table of contractors -->
+  <div>
+    <p>Список контрагентов в аэропорту</p>
+    <table class="table caption-top">
+      <tr>
+        <th>Наименование контрагента</th>
+      </tr>
+      <tr>
+        <td th:text="#{NotFoundText}"></td>
+      </tr>
+    </table>
+    <a class="btn btn-outline-primary" href="#" role="button">Обновить</a>
+  </div>
+  <br/>
+  <!-- Additional references -->
+  <div>
+    <p>Связанные справочники</p>
+    <a class="btn btn-outline-primary" href="#" role="button">Услуги АП</a>
+    <a class="btn btn-outline-primary" href="#" role="button">Список ТГО</a>
+  </div>
+  <br/>
+</div>
+<!-- Bootstrap script -->
+<script src="../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
+        th:href="@{../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
+</body>
+</html>

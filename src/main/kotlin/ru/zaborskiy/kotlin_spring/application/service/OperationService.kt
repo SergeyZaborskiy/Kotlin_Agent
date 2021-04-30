@@ -24,5 +24,4 @@ class OperationService(private val aircraftOperationRepository: AircraftOperatio
     fun remove(id: Long) = aircraftOperationRepository.deleteById(id)
 
 
-
 }

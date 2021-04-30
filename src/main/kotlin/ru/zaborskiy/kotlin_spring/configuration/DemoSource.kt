@@ -55,8 +55,9 @@ class DemoSource(
         var aircraft3 = Aircraft(name = "A320")
 
         //Airport demo
-        var airport1 = Airport(name = "PULKOVO", icao = "ULLI", iata = "LED")
-        var airport2 = Airport(name = "DOMODEDOVO", icao = "UUDD", iata = "DME")
+        var airport1 =
+            Airport(name = "PULKOVO", icao = "ULLI", iata = "LED", country = "Russia", city = "Saint-Petersburg")
+        var airport2 = Airport(name = "DOMODEDOVO", icao = "UUDD", iata = "DME", country = "Russia", city = "Moscow")
 
 
         //save
@@ -65,6 +66,13 @@ class DemoSource(
         operationService.add(operation2)
         operationService.add(operation3)
         operationService.add(operation4)
+
+        airportService.add(airport1)
+        airportService.add(airport2)
+
+        aircraftService.add(aircraft1)
+        aircraftService.add(aircraft2)
+        aircraftService.add(aircraft3)
 
     }
 }

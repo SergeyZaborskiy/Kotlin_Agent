@@ -15,15 +15,18 @@ class ScheduleService(private val airportOperationScheduleRepository: AirportOpe
     fun get(id: Long): AirportOperationSchedule = airportOperationScheduleRepository.findScheduleById(id)
 
     @Transactional
-    fun add(airportOperationSchedule: AirportOperationSchedule): AirportOperationSchedule = airportOperationScheduleRepository.save(airportOperationSchedule)
+    fun add(airportOperationSchedule: AirportOperationSchedule): AirportOperationSchedule =
+        airportOperationScheduleRepository.save(airportOperationSchedule)
 
     @Transactional
-    fun save(airportOperationSchedule: AirportOperationSchedule): AirportOperationSchedule = airportOperationScheduleRepository.save(airportOperationSchedule)
+    fun save(airportOperationSchedule: AirportOperationSchedule): AirportOperationSchedule =
+        airportOperationScheduleRepository.save(airportOperationSchedule)
 
     @Transactional
     fun remove(id: Long) = airportOperationScheduleRepository.deleteById(id)
 
     @Transactional
-    fun removeObj(airportOperationSchedule: AirportOperationSchedule) = airportOperationScheduleRepository.delete(airportOperationSchedule)
+    fun removeObj(airportOperationSchedule: AirportOperationSchedule) =
+        airportOperationScheduleRepository.delete(airportOperationSchedule)
 
 }
