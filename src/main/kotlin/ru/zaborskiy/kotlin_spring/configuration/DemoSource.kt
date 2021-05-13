@@ -2,10 +2,10 @@ package ru.zaborskiy.kotlin_spring.configuration
 
 import org.springframework.context.annotation.Configuration
 import ru.zaborskiy.kotlin_spring.application.service.*
+import ru.zaborskiy.kotlin_spring.domain.entity.ScheduleType
 import ru.zaborskiy.kotlin_spring.domain.entity.flight.Aircraft
 import ru.zaborskiy.kotlin_spring.domain.entity.airport.Airport
-import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportOperationSchedule
-import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportItem
+import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportSchedule
 import ru.zaborskiy.kotlin_spring.domain.entity.operation.AirlineOperation
 import ru.zaborskiy.kotlin_spring.domain.entity.operation.AirlineSubOperation
 import javax.annotation.PostConstruct
@@ -59,13 +59,19 @@ class DemoSource(
             Airport(name = "PULKOVO", icao = "ULLI", iata = "LED", country = "Russia", city = "Saint-Petersburg")
         var airport2 = Airport(name = "DOMODEDOVO", icao = "UUDD", iata = "DME", country = "Russia", city = "Moscow")
 
+        //Schedule demo
 
-        //save
+        var airportSchedule = AirportSchedule()
+        airportSchedule.airport = airport1
+        airportSchedule.aircraft = aircraft1
+        airportSchedule.scheduleType = ScheduleType.Arrival.type
+        airportSchedule.addAirlineOperation(operation1)
+        airportSchedule.addAirlineOperation(operation2)
+        airportSchedule.addAirlineOperation(operation3)
+        airportSchedule.addAirlineOperation(operation4)
 
-        operationService.add(operation1)
-        operationService.add(operation2)
-        operationService.add(operation3)
-        operationService.add(operation4)
+
+                //save
 
         airportService.add(airport1)
         airportService.add(airport2)
@@ -73,6 +79,12 @@ class DemoSource(
         aircraftService.add(aircraft1)
         aircraftService.add(aircraft2)
         aircraftService.add(aircraft3)
+
+        operationService.add(operation1)
+        operationService.add(operation2)
+        operationService.add(operation3)
+        operationService.add(operation4)
+
 
     }
 }

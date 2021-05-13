@@ -63,12 +63,11 @@
   <div>
     <p>Связанные справочники</p>
     <a class="btn btn-outline-primary" href="#" role="button">Услуги АП</a>
-    <a class="btn btn-outline-primary" href="#" role="button">Список ТГО</a>
+    <a class="btn btn-outline-primary" href="#" th:href="@{/airports/{id}/schedules(id=${airportId})}" role="button">Список ТГО</a>
   </div>
   <br/>
 </div>
 <!-- Bootstrap script -->
-<script src="../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
-        th:href="@{../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
+<script src="../webjars/bootstrap/4.6.0-1/js/bootstrap.js" th:href="@{../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
 </body>
 </html>

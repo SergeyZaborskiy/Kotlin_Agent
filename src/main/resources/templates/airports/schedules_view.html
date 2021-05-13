@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{SchedulesPageTitle}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link type="text/css" rel="stylesheet" href="../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
+          th:href="@{../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
+    <script src="../../webjars/jquery/3.5.1/jquery.min.js"
+            th:href="@{../../webjars/jquery/3.5.1/jquery.min.js}"></script>
+</head>
+
+<body>
+<!-- Header -->
+<div th:replace="fragments/header :: header">TOP MENU</div>
+<!-- Body -->
+<div class="container-fluid">
+    <br/>
+    <h1 th:text="|#{SchedulesPageTitle} в аэропорту ${airportName}|">VALUE</h1>
+    <div class="btn-group-sm">
+        <a class="btn btn-outline-primary" href="/airports" th:href="@{/airports/{airportId}/schedules/new(airportId=${airportId})}" role="button">Добавить ТГО</a>
+        <a class="btn btn-outline-primary" href="/airports" th:href="@{/airports/{airportId}(airportId=${airportId})}" role="button">Вернуться к аэропорту</a>
+        <a class="btn btn-outline-primary" href="/airports" role="button">Список аэропортов</a>
+        <a class="btn btn-outline-primary" href="/" role="button" th:text="#{MainPageButton}">Return to Main</a>
+    </div>
+    <br/>
+    <!-- Search options -->
+    <form action="#" method="get">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Тип Рейса</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01" name="typeOfSchedule">
+                <option selected disabled>Выбрать...</option>
+                <option th:each="typeOfSchedule:${typesOfSchedules}" th:text="${typeOfSchedule.getType()}">VALUE</option>
+            </select>
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect02">Вид ВС</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect02" name="airplane">
+                <option selected disabled>Выбрать...</option>
+                <option th:each="plane:${planes}" th:text="${plane.name}">VALUE</option>
+            </select>
+        </div>
+        <input type="submit" value="Ок" class="btn btn-outline-primary">
+    </form>
+    <br/>
+    <!-- List -->
+    <table class="table caption-top">
+        <caption>List of schedules</caption>
+        <tr>
+            <th>Список операций</th>
+            <th>Вид ВС</th>
+            <th>Вид рейса</th>
+            <th>Пользователь</th>
+            <th>Дата</th>
+            <th>Действия</th>
+        </tr>
+        <tr th:each="schedule:${returnedSchedules}">
+            <td>
+                <p th:each="operation:${schedule.airlineOperations}" th:text="${operation.name}">VALUE</p>
+            </td>
+            <td th:text="${schedule.aircraft.name}">VALUE</td>
+            <td th:text="${schedule.scheduleType}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td th:text="#{NotFoundText}">VALUE</td>
+            <td>
+                <div class="btn-group">
+                    <form th:action="@{/airports/{airportId}/schedules/{schedulesId}(airportId=${airportId},schedulesId=${schedule.getId()})}" th:method="GET">
+                        <input class="btn btn-outline-primary" type="submit" value="Подробнее">
+                    </form>
+                    <form th:action="@{/airports/{airportId}/schedules/{schedulesId}(airportId=${airportId},schedulesId=${schedule.getId()})}" th:method="DELETE">
+                        <input class="btn btn-outline-danger" type="submit" value="Удалить">
+                    </form>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<!-- Bootstrap script -->
+<script src="../../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
+        th:href="@{../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
+</body>
+</html>

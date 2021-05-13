@@ -1,6 +1,6 @@
 package ru.zaborskiy.kotlin_spring.domain.entity.operation
 
-import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportOperationSchedule
+import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportSchedule
 import javax.persistence.*
 
 @Entity
@@ -34,7 +34,7 @@ data class AirlineOperation(
         joinColumns = [JoinColumn(name = "operation_id")],
         inverseJoinColumns = [JoinColumn(name = "schedule_id")]
     )
-    var airportOperationSchedules: MutableList<AirportOperationSchedule> = mutableListOf()
+    var airportSchedules: MutableList<AirportSchedule> = mutableListOf()
 
 
     //Functions for lists
@@ -46,10 +46,13 @@ data class AirlineOperation(
         }
     }
 
-    fun addSchedule(airportOperationSchedule: AirportOperationSchedule) {
-        if (airportOperationSchedules.contains(airportOperationSchedule)) return
+    fun addSchedule(airportSchedule: AirportSchedule) {
+        if (airportSchedules.contains(airportSchedule)) {
+            return
+        }
         else {
-            airportOperationSchedules.add(airportOperationSchedule)
+            airportSchedules.add(airportSchedule)
+            /*airportSchedule.addAirlineOperation(this)*/
         }
     }
 
@@ -61,10 +64,10 @@ data class AirlineOperation(
 
     }
 
-    fun removeSchedule(airportOperationSchedule: AirportOperationSchedule) {
-        if (!airportOperationSchedules.contains(airportOperationSchedule)) return
+    fun removeSchedule(airportSchedule: AirportSchedule) {
+        if (!airportSchedules.contains(airportSchedule)) return
         else {
-            airportOperationSchedules.remove(airportOperationSchedule)
+            airportSchedules.remove(airportSchedule)
         }
     }
 

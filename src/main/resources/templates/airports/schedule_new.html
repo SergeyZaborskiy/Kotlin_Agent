@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="#{ScheduleFormTitle}"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link type="text/css" rel="stylesheet" href="../../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css"
+          th:href="@{../../../webjars/bootstrap/4.6.0-1/css/bootstrap.min.css}"/>
+    <script src="../../../webjars/jquery/3.5.1/jquery.min.js"
+            th:href="@{../../../webjars/jquery/3.5.1/jquery.min.js}"></script>
+</head>
+
+<body>
+<!-- Header -->
+<div th:replace="fragments/header :: header">TOP MENU</div>
+<!-- Body -->
+<div class="container-fluid">
+    <!-- H1 and buttons -->
+    <h1 th:text="#{ScheduleFormTitle}">VALUE</h1>
+    <div class="btn-group-sm">
+        <a class="btn btn-outline-primary" href="/airports" th:href="@{/airports/{airportId}(airportId=${airportId})}"
+           role="button">Вернуться к аэропорту</a>
+        <a class="btn btn-outline-primary" href="/airports" role="button">Список аэропортов</a>
+        <a class="btn btn-outline-primary" href="/" role="button" th:text="#{MainPageButton}">Return to Main</a>
+    </div>
+    <br/>
+    <!-- Form -->
+    <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1">Название АП</span>
+        <input type="text" class="form-control" th:field="${returnedAirport.name}" aria-describedby="basic-addon1"
+               disabled>
+    </div>
+    <form th:action="@{/airports/schedules/new}" th:object="${newSchedule}" method="POST">
+        <input type="hidden" th:value="${returnedAirport.id}" name="airport">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">Тип Рейса</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect01" name="scheduleType">
+                <option selected disabled>Выбрать...</option>
+                <option th:each="typeOfSchedule:${typesOfSchedules}" th:text="${typeOfSchedule.getType()}">VALUE</option>
+            </select>
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect02">Вид ВС</label>
+            </div>
+            <select class="custom-select" id="inputGroupSelect02" name="aircraft">
+                <option selected disabled>Выбрать...</option>
+                <option th:each="plane:${planes}" th:text="${plane.name}" th:value="${plane.getId()}">VALUE</option>
+            </select>
+        </div>
+        <input type="submit" value="OK" class="btn btn-outline-primary">
+    </form>
+
+</div>
+<!-- Bootstrap script -->
+<script src="../../../webjars/bootstrap/4.6.0-1/js/bootstrap.js"
+        th:href="@{../../../webjars/bootstrap/4.6.0-1/js/bootstrap.js}"></script>
+</body>
+</html>

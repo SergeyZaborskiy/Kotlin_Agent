@@ -6,11 +6,13 @@ import javax.persistence.*
 
 @Entity
 @Table(name = "schedules")
-data class AirportOperationSchedule(
+data class AirportSchedule(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_id")
-    var id: Long = 0L
+    var id: Long = 0L,
+
+    var scheduleType: String = ""
 
 ) {
 
@@ -36,12 +38,17 @@ data class AirportOperationSchedule(
         joinColumns = [JoinColumn(name = "schedule_id")],
         inverseJoinColumns = [JoinColumn(name = "operation_id")]
     )
-    var listOfAirlineOperation: MutableList<AirlineOperation> = mutableListOf()
+    var airlineOperations: MutableList<AirlineOperation> = mutableListOf()
 
 
     //Functions that add to lists
-    fun addOperationToList(airlineOperation: AirlineOperation) {
-        listOfAirlineOperation.add(airlineOperation)
+    fun addAirlineOperation(airlineOperation: AirlineOperation) {
+        if (airlineOperations.contains(airlineOperation)) {
+            return
+        } else {
+            airlineOperations.add(airlineOperation)
+            airlineOperation.addSchedule(this)
+        }
     }
 
     private fun sameAsCurrent(airport: Airport, newAirport: Airport): Boolean {
