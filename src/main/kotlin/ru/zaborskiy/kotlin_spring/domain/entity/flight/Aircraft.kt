@@ -11,7 +11,7 @@ data class Aircraft(
     @Column(name = "aircraft_id")
     var id: Long = 0L,
 
-    @Column(name = "aircraft_name")
+    @Column(name = "aircraft1_name")
     var name: String = ""
 ) {
 

@@ -33,7 +33,6 @@ data class Airport(
     var listOfAirportSchedules: MutableList<AirportSchedule> = mutableListOf()
 
     //Functions that add to lists
-
     fun addScheduleToList(airportSchedule: AirportSchedule) {
         listOfAirportSchedules.add(airportSchedule)
     }
