@@ -31,6 +31,12 @@
       <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Название ВС</span>
         <input type="text" class="form-control" th:field="*{name}" aria-describedby="basic-addon1">
+        <span class="input-group-text" id="basic-addon4">Модель ВС</span>
+        <input type="text" class="form-control" th:field="*{fullName}" aria-describedby="basic-addon4">
+        <span class="input-group-text" id="basic-addon2">Стоимость Цикла ВСУ</span>
+        <input type="text" class="form-control" th:field="*{rechargeCycleCost}" aria-describedby="basic-addon2">
+        <span class="input-group-text" id="basic-addon3">Стоимость Минуты ВСУ</span>
+        <input type="text" class="form-control" th:field="*{rechargeMinuteCost}" aria-describedby="basic-addon3">
       </div>
       <br/>
       <input type="submit" class="btn btn-success" value="Сохранить">

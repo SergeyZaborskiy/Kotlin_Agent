@@ -30,10 +30,16 @@
         <caption>Список рейсов</caption>
         <tr>
             <th>Название ВС</th>
+            <th>Модель ВС</th>
+            <th>Стоимость цикла ВСУ</th>
+            <th>Стоимость минуты ВСУ</th>
             <th>Действия</th>
         </tr>
         <tr th:each="aircraft:${aircrafts}">
             <td th:text="${aircraft.name}">VALUE</td>
+            <td th:text="${aircraft.fullName}">VALUE</td>
+            <td th:text="${aircraft.rechargeCycleCost}">VALUE</td>
+            <td th:text="${aircraft.rechargeMinuteCost}">VALUE</td>
             <td>
                 <div class="btn-group">
                     <form th:action="@{/flights/aircrafts/{id}(id=${aircraft.getId()})}" th:method="GET">

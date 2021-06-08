@@ -43,15 +43,42 @@
     <div>
         <hr/>
         <br/>
-        <p>Список подгрупп операции</p>
+        <p>Список групп обслуживания</p>
         <br/>
         <table class="table caption-top">
-            <tr th:each="subOperation:${returnedOperation.getAirlineSubOperations()}">
+            <tr>
+                <th>Название</th>
+                <th>Список операций в составе</th>
+                <th>Управление операциями</th>
+                <th>Управление группой</th>
+            </tr>
+            <tr th:each="subOperation:${returnedOperation.getServiceGroups()}">
                 <td th:text="${subOperation.getName()}">VALUE</td>
+                <td><p th:each="serviceOperation:${subOperation.serviceOperations}" th:text="${serviceOperation.name}">
+                </td>
+                <td>
+                    <div class="input-group mb-3">
+                        <form th:action="@{/operations/serviceOperation/new}" th:object="${newServiceOperation}"
+                              method="POST">
+                            <input type="hidden" th:name="serviceGroup" th:value="${subOperation.id}">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon6">Операция</span>
+                                <input type="text" class="form-control" th:field="*{name}"
+                                       aria-describedby="basic-addon6">
+                                <input type="hidden" th:value="${returnedOperation.id}" name="operation">
+                            </div>
+                            <input type="submit" class="btn btn-success" value="Добавить операцию">
+                        </form>
+                        <form th:action="@{/operations/serviceOperation/{subOperationId}/all(subOperationId=${subOperation.getId()})}"
+                              th:method="DELETE">
+                            <input class="btn btn-outline-danger" type="submit" value="Удалить все операции">
+                        </form>
+                    </div>
+                </td>
                 <td>
                     <form th:action="@{/operations/sub/{subOperationId}(subOperationId=${subOperation.getId()})}"
                           th:method="DELETE">
-                        <input class="btn btn-outline-danger" type="submit" value="Удалить">
+                        <input class="btn btn-outline-danger" type="submit" value="Удалить группу">
                     </form>
                 </td>
             </tr>
@@ -60,11 +87,11 @@
     <hr/>
     <!-- SubOperation adding form -->
     <div>
-        <p>Добавить новую подгруппу</p>
+        <p>Добавить новую группу обслуживания</p>
         <form th:action="@{/operations/sub}" th:object="${newSubOperation}" method="POST">
-            <input type="hidden" th:name="airlineOperation" th:value="${returnedOperation.id}">
+            <input type="hidden" th:name="technologicalOperation" th:value="${returnedOperation.id}">
             <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon2">Подгруппа</span>
+                <span class="input-group-text" id="basic-addon2">Группа</span>
                 <input type="text" class="form-control" th:field="*{name}" aria-describedby="basic-addon2">
                 <input type="hidden" th:value="${returnedOperation.id}" name="operation">
             </div>

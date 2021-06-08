@@ -59,7 +59,7 @@
         </tr>
         <tr th:each="schedule:${returnedSchedules}">
             <td>
-                <p th:each="operation:${schedule.airlineOperations}" th:text="${operation.name}">VALUE</p>
+                <p th:each="operation:${schedule.technologicalOperations}" th:text="${operation.name}">VALUE</p>
             </td>
             <td th:text="${schedule.aircraft.name}">VALUE</td>
             <td th:text="${schedule.scheduleType}">VALUE</td>

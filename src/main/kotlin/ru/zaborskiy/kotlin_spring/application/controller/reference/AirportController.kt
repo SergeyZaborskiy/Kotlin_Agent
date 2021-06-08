@@ -8,7 +8,7 @@ import ru.zaborskiy.kotlin_spring.application.service.AirportService
 import ru.zaborskiy.kotlin_spring.application.service.ScheduleService
 import ru.zaborskiy.kotlin_spring.domain.entity.ScheduleType
 import ru.zaborskiy.kotlin_spring.domain.entity.airport.Airport
-import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportSchedule
+import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportTechnologicalSchedule
 
 
 @Controller
@@ -44,7 +44,7 @@ class AirportController(private val airportService: AirportService, private val 
     @GetMapping("/{airportId}/schedules")
     fun getAirportSchedule(@PathVariable airportId: Long, model: Model): String {
         val returnedAirport = airportService.get(airportId)
-        val returnedSchedules = returnedAirport.listOfAirportSchedules
+        val returnedSchedules = returnedAirport.listOfAirportTechnologicalSchedules
         val planes = returnedSchedules.map { it.aircraft }.distinct()
         val typesOfSchedules = listOf<ScheduleType>(ScheduleType.Arrival, ScheduleType.Departure, ScheduleType.Revers)
         model.addAttribute("returnedSchedules", returnedSchedules)
@@ -58,7 +58,7 @@ class AirportController(private val airportService: AirportService, private val 
     @GetMapping("/{airportId}/schedules/new")
     fun getNewAirportScheduleForm(@PathVariable airportId: Long, model: Model): String {
         val returnedAirport = airportService.get(airportId)
-        val newSchedule = AirportSchedule()
+        val newSchedule = AirportTechnologicalSchedule()
         model.addAttribute("airportId", airportId)
         model.addAttribute("returnedAirport", returnedAirport)
         model.addAttribute("newSchedule", newSchedule)
@@ -74,8 +74,8 @@ class AirportController(private val airportService: AirportService, private val 
     }
 
     @PostMapping("/schedules/new")
-    fun addAirportSchedule(@ModelAttribute newSchedule: AirportSchedule): String {
-        scheduleService.add(newSchedule)
+    fun addAirportSchedule(@ModelAttribute newTechnologicalSchedule: AirportTechnologicalSchedule): String {
+        scheduleService.add(newTechnologicalSchedule)
         return "redirect:/airports"
     }
 

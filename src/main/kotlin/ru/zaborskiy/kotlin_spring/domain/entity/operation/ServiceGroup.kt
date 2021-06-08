@@ -1,11 +1,11 @@
 package ru.zaborskiy.kotlin_spring.domain.entity.operation
 
-import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportItem
+import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportServiceForMaintenance
 import javax.persistence.*
 
 @Entity
 @Table(name = "sub_operations")
-data class AirlineSubOperation(
+data class ServiceGroup(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subOperations_id")
@@ -24,11 +24,11 @@ data class AirlineSubOperation(
 
     @ManyToOne(cascade = [CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST])
     @JoinColumn(name = "operation_id")
-    var airlineOperation: AirlineOperation = AirlineOperation()
+    var technologicalOperation: TechnologicalOperation = TechnologicalOperation()
         set(value) {
             if (sameAsCurrent(field, value)) return
             else field = value
-            airlineOperation.addSubOperation(this)
+            technologicalOperation.addSubOperation(this)
         }
 
     @ManyToMany
@@ -37,26 +37,41 @@ data class AirlineSubOperation(
         joinColumns = [JoinColumn(name = "airportService_id")],
         inverseJoinColumns = [JoinColumn(name = "subOperation_id")]
     )
-    var airportProducts: MutableList<AirportItem> = mutableListOf()
+    var airportProducts: MutableList<AirportServiceForMaintenance> = mutableListOf()
+
+    @OneToMany(mappedBy = "serviceGroup", cascade = [CascadeType.ALL])
+    var serviceOperations: MutableList<ServiceOperation> = mutableListOf()
+
 
     //Functions for lists
-    fun addAirportProduct(airportProduct: AirportItem) {
+    fun addAirportProduct(airportProduct: AirportServiceForMaintenance) {
         if (airportProducts.contains(airportProduct)) return
         else {
             airportProducts.add(airportProduct)
         }
     }
 
-    fun removeAirportProduct(airportProduct: AirportItem) {
+    fun removeAirportProduct(airportProduct: AirportServiceForMaintenance) {
         if (!airportProducts.contains(airportProduct)) return
         else {
             airportProducts.remove(airportProduct)
         }
     }
+
+    fun addServiceOperation(serviceOperation: ServiceOperation) {
+        if (serviceOperations.contains(serviceOperation)) return
+        else {
+            serviceOperations.add(serviceOperation)
+        }
+    }
+
+    fun deleteAllServiceOperations() {
+        serviceOperations.clear()
+    }
 }
 
 //Functions
-private fun sameAsCurrent(airlineOperation: AirlineOperation, newAirlineOperation: AirlineOperation): Boolean {
-    return airlineOperation == null || newAirlineOperation == null || airlineOperation == newAirlineOperation
+private fun sameAsCurrent(technologicalOperation: TechnologicalOperation, newTechnologicalOperation: TechnologicalOperation): Boolean {
+    return technologicalOperation == null || newTechnologicalOperation == null || technologicalOperation == newTechnologicalOperation
 }
 

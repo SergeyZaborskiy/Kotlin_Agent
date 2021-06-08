@@ -30,11 +30,11 @@ data class Airport(
         mappedBy = "airport",
         cascade = [CascadeType.ALL]
     )
-    var listOfAirportSchedules: MutableList<AirportSchedule> = mutableListOf()
+    var listOfAirportTechnologicalSchedules: MutableList<AirportTechnologicalSchedule> = mutableListOf()
 
     //Functions that add to lists
-    fun addScheduleToList(airportSchedule: AirportSchedule) {
-        listOfAirportSchedules.add(airportSchedule)
+    fun addScheduleToList(airportTechnologicalSchedule: AirportTechnologicalSchedule) {
+        listOfAirportTechnologicalSchedules.add(airportTechnologicalSchedule)
     }
 
 }

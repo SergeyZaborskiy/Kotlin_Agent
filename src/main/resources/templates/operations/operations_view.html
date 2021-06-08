@@ -27,14 +27,14 @@
         <caption>Список операций</caption>
         <tr>
             <th>Наименование</th>
-            <th>Список подгрупп</th>
+            <th>Группы обслуживания</th>
             <th>Пользователь</th>
             <th>Дата изменения</th>
             <th>Действия</th>
         </tr>
         <tr th:each="operation:${operationsList}">
             <td th:text="${operation.getName()}">VALUE</td>
-            <td><p th:each="subOperation:${operation.getAirlineSubOperations()}"
+            <td><p th:each="subOperation:${operation.getServiceGroups()}"
                    th:text="${subOperation.getName()}"></p>
             </td>
             <td th:text="${operation.getUserModified()}">VALUE</td>

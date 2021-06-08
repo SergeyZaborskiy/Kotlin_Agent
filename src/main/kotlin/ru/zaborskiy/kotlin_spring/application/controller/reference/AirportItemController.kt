@@ -5,7 +5,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.*
 import ru.zaborskiy.kotlin_spring.application.service.AirportProductService
-import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportItem
+import ru.zaborskiy.kotlin_spring.domain.entity.airport.AirportServiceForMaintenance
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -26,18 +26,18 @@ class AirportItemController(private val airportProductService: AirportProductSer
 
     @GetMapping("/new")
     fun getOperationForm(model: Model): String {
-        var airportService = AirportItem()
+        var airportService = AirportServiceForMaintenance()
         model.addAttribute("airportService", airportService)
         return "/references/services/service_form"
     }
 
     @PostMapping
-    fun addOperation(@ModelAttribute airportItem: AirportItem): String {
+    fun addOperation(@ModelAttribute airportServiceForMaintenance: AirportServiceForMaintenance): String {
         val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
         var auth = SecurityContextHolder.getContext().authentication
-        airportItem.timeDateModified = LocalDateTime.now().format(formatter)
-        airportItem.userModified = auth.name
-        airportProductService.add(airportItem)
+        airportServiceForMaintenance.timeDateModified = LocalDateTime.now().format(formatter)
+        airportServiceForMaintenance.userModified = auth.name
+        airportProductService.add(airportServiceForMaintenance)
         return "redirect:/references/services"
     }
 

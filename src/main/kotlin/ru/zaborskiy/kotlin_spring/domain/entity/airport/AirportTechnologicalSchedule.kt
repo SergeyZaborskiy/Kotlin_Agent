@@ -1,12 +1,12 @@
 package ru.zaborskiy.kotlin_spring.domain.entity.airport
 
-import ru.zaborskiy.kotlin_spring.domain.entity.operation.AirlineOperation
+import ru.zaborskiy.kotlin_spring.domain.entity.operation.TechnologicalOperation
 import ru.zaborskiy.kotlin_spring.domain.entity.flight.Aircraft
 import javax.persistence.*
 
 @Entity
 @Table(name = "schedules")
-data class AirportSchedule(
+data class AirportTechnologicalSchedule(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "schedule_id")
@@ -38,16 +38,16 @@ data class AirportSchedule(
         joinColumns = [JoinColumn(name = "schedule_id")],
         inverseJoinColumns = [JoinColumn(name = "operation_id")]
     )
-    var airlineOperations: MutableList<AirlineOperation> = mutableListOf()
+    var technologicalOperations: MutableList<TechnologicalOperation> = mutableListOf()
 
 
     //Functions that add to lists
-    fun addAirlineOperation(airlineOperation: AirlineOperation) {
-        if (airlineOperations.contains(airlineOperation)) {
+    fun addAirlineOperation(technologicalOperation: TechnologicalOperation) {
+        if (technologicalOperations.contains(technologicalOperation)) {
             return
         } else {
-            airlineOperations.add(airlineOperation)
-            airlineOperation.addSchedule(this)
+            technologicalOperations.add(technologicalOperation)
+            technologicalOperation.addSchedule(this)
         }
     }
 
